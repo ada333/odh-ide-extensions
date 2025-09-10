@@ -11,16 +11,7 @@
     "scripts": {
         "build": "turbo run build",
         "test": "turbo run test",
-        "build:prod": "turbo run build:prod",
-        "eslint": "jlpm eslint:check --fix",
-        "eslint:check": "eslint . --cache --ext .ts,.tsx",
-        "lint": "jlpm stylelint && jlpm prettier && jlpm eslint",
-        "lint:check": "jlpm stylelint:check && jlpm prettier:check && jlpm eslint:check",
-        "prettier": "jlpm prettier:base --write --list-different",
-        "prettier:base": "prettier \"**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}\"",
-        "prettier:check": "jlpm prettier:base --check",
-        "stylelint": "jlpm stylelint:check --fix",
-        "stylelint:check": "stylelint --cache \"style/**/*.css\""
+        "build:prod": "turbo run build:prod"
     },
     "devDependencies": {
         "dotenv": "^16.4.7",
