@@ -7,7 +7,7 @@ require-extension:
 lint-dependencies:
 	@$(PYTHON) -m pip install -q -r lint_requirements.txt
 
-lint-server: require-extension lint-dependencies
+lint-python: require-extension lint-dependencies
 	(cd $(EXTENSION) && $(PYTHON) -m flake8 .)
 	@echo $(BLACK_CMD)
 	@(cd $(EXTENSION) && $(BLACK_CMD)) || (echo "Black formatting encountered issues. Use 'make black-format' to fix."; exit 1)
@@ -18,15 +18,21 @@ black-format: require-extension
 prettier-check-ui: require-extension
 	npx --yes prettier "$(EXTENSION)/**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}" --check
 
-eslint-check-ui: require-extension
-	npx --yes eslint "$(EXTENSION)" --cache --ext .ts,.tsx --max-warnings=0
-
 prettier-ui: require-extension
 	npx --yes prettier "$(EXTENSION)/**/*{.ts,.tsx,.js,.jsx,.css,.json,.md}" --write --list-different
 
+eslint-check-ui: require-extension
+	npx --yes eslint "$(EXTENSION)" --cache --ext .ts,.tsx,.js,.jsx --max-warnings=0
+
 eslint-ui: require-extension
-	npx --yes eslint "$(EXTENSION)" --cache --ext .ts,.tsx --max-warnings=0 --fix
+	npx --yes eslint "$(EXTENSION)" --cache --ext .ts,.tsx,.js,.jsx --max-warnings=0 --fix
 
 lint-ui: prettier-ui eslint-ui
 
-lint: lint-ui lint-server ## Run linters
+stylelint-check-ui: require-extension
+	npx --yes stylelint "$(EXTENSION)/**/*.{css,scss}" --max-warnings=0
+
+stylelint-ui: require-extension
+	npx --yes stylelint "$(EXTENSION)/**/*.{css,scss}" --fix
+
+lint: lint-ui lint-python ## Run linters

@@ -8,8 +8,8 @@
   "rules": {
     "csstree/validator": true,
     "property-no-vendor-prefix": null,
-    "selector-class-pattern": "^([a-z][A-z\\d]*)(-[A-z\\d]+)*$",
+    "selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
     "selector-no-vendor-prefix": null,
     "value-no-vendor-prefix": null
   }
-} 
+}
